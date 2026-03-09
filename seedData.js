@@ -1,14 +1,18 @@
 console.log('🌱 Starting database seeding...');
 
-// First, check if modules are available
+require('dotenv').config();
+
 try {
     const mongoose = require('mongoose');
     
-    // Connect to MongoDB
-    mongoose.connect('mongodb://localhost:27017/farmer_app')
+    // Connect to MongoDB Atlas
+    mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
         .then(() => {
-            console.log('✅ Connected to MongoDB');
-            
+            console.log('✅ Connected to MongoDB Atlas');
+
             // Define schemas
             const Weather = mongoose.model('Weather', new mongoose.Schema({
                 city: String,
